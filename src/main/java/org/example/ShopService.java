@@ -43,6 +43,7 @@ public class ShopService {
     public void placeOrder(Product orderedProduct, int amount) {
         Order newOrder = new Order(orderedProduct, amount);
         Product foundProduct = productRepo.findProduct(orderedProduct);
+
         System.out.println(foundProduct);
         System.out.println(newOrder);
         System.out.println(productRepo);
@@ -51,8 +52,9 @@ public class ShopService {
             System.out.println("Leider sind wir für dein gewünschtes Produkt out of stock");
         } else {
             orderRepo.addOrder(newOrder);
-            System.out.println("newOrder: " + newOrder);
-            System.out.println("Aktualisiertes orderRepo: " + orderRepo);
+
+        System.out.println("newOrder: " + newOrder);
+        System.out.println("Aktualisiertes orderRepo: " + orderRepo);
 
         }
     }
