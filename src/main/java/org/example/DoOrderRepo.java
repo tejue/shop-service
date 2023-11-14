@@ -1,9 +1,9 @@
 package org.example;
 
 public interface DoOrderRepo {
-void addOrder();
+void addOrder(Order order);
 
-void removeOrder();
+void removeOrder(Order order);
 
-Order findOrder();
+Order findOrder(Order order);
 }

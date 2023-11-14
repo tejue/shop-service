@@ -1,19 +1,22 @@
 package org.example;
 
-import java.util.List;
-
 public class ShopService {
     private ProductRepo productRepo;
-    private OrderRepo orderRepo;
-
+    private OrderListRepo orderListRepo;
+    private DoOrderRepo doOrderRepo;
     // CONSTRUCTOR
 
     public ShopService() {
     }
 
-    public ShopService(ProductRepo productRepo, OrderRepo orderRepo) {
+    public ShopService(ProductRepo productRepo, OrderListRepo orderListRepo) {
         this.productRepo = productRepo;
-        this.orderRepo = orderRepo;
+        this.orderListRepo = orderListRepo;
+    }
+
+    public ShopService(ProductRepo productRepo, DoOrderRepo doOrderRepo) {
+        this.productRepo = productRepo;
+        this.doOrderRepo = doOrderRepo;
     }
 
     public ProductRepo getProductRepo() {
@@ -24,38 +27,41 @@ public class ShopService {
         this.productRepo = productRepo;
     }
 
-    public OrderRepo getOrderRepo() {
-        return orderRepo;
+    public OrderListRepo getOrderListRepo() {
+        return orderListRepo;
     }
 
-    public void setOrderRepo(OrderRepo orderRepo) {
-        this.orderRepo = orderRepo;
+    public void setOrderListRepo(OrderListRepo orderListRepo) {
+        this.orderListRepo = orderListRepo;
     }
 
     @Override
     public String toString() {
         return "ShopService{" +
                 "productRepo=" + productRepo +
-                ", orderRepo=" + orderRepo +
+                ", orderRepo=" + orderListRepo +
                 '}';
     }
 
-    public void placeOrder(Product orderedProduct, int amount) {
-        Order newOrder = new Order(orderedProduct, amount);
+    public void placeOrder(Product orderedProduct, int amount, int orderID) {
+        Order newOrder = new Order(orderedProduct, amount, orderID);
         Product foundProduct = productRepo.findProduct(orderedProduct);
 
         System.out.println(foundProduct);
         System.out.println(newOrder);
         System.out.println(productRepo);
 
-        if (!foundProduct.availability()) {
-            System.out.println("Leider sind wir für dein gewünschtes Produkt out of stock");
+        if (foundProduct == orderedProduct) {
+
+            orderListRepo.addOrder(newOrder);
         } else {
-            orderRepo.addOrder(newOrder);
+            System.out.println("Leider sind wir für dein gewünschtes Produkt out of stock");
+        }
+
 
         System.out.println("newOrder: " + newOrder);
-        System.out.println("Aktualisiertes orderRepo: " + orderRepo);
+        System.out.println("Aktualisiertes orderRepo: " + orderListRepo);
 
-        }
     }
 }
+

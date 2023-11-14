@@ -4,57 +4,56 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class OrderRepo {
+public class OrderListRepo {
 
-    List<Order> orders = new ArrayList<>();
+    List<Order> ordersList = new ArrayList<>();
 
-    //GETTER & SETTER
-
-
-    public List<Order> getOrders() {
-        return orders;
+    // GETTER & SETTER
+    public List<Order> getOrdersList() {
+        return ordersList;
     }
 
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
+    public void setOrdersList(List<Order> ordersList) {
+        this.ordersList = ordersList;
     }
 
-    //EQUALS & HASH-CODE
-
-
+    // EQUALS & HASH-CODE
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        OrderRepo orderRepo = (OrderRepo) o;
-        return Objects.equals(orders, orderRepo.orders);
+        OrderListRepo orderRepo = (OrderListRepo) o;
+        return Objects.equals(ordersList, orderRepo.ordersList);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(orders);
+        return Objects.hash(ordersList);
     }
 
-    //TO-STRING
-
-
+    // TO-STRING
     @Override
     public String toString() {
         return "OrderRepo{" +
-                "orders=" + orders +
+                "orders=" + ordersList +
                 '}';
     }
 
+    // METHODS
+
+    // ADD ORDER
     public void addOrder(Order order) {
-        orders.add(order);
+        ordersList.add(order);
     }
 
+    // REMOVE ORDER
     public void removeOrder(Order order) {
-        orders.remove(order);
+        ordersList.remove(order);
     }
 
+    // QUERY ORDER
     public Order findOrder(Order searchedOrder) {
-        for (Order order : orders) {
+        for (Order order : ordersList) {
             if (order == searchedOrder)
                 return order;
         }
