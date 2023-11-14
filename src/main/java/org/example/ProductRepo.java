@@ -18,7 +18,6 @@ public class ProductRepo {
 
     // EQUALS & HASH-CODE
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -48,10 +47,16 @@ public class ProductRepo {
         products.remove(product);
     }
 
-    public void findProduct() {
+    public Product findProduct(Product searchedProduct) {
         for (Product product : products) {
-            System.out.println(product);
+            if (product == searchedProduct)
+                return product;
         }
+        return null;
+    }
+
+    public Product queryProduct(int productIndex) {
+        return products.get(productIndex);
     }
 
 }
